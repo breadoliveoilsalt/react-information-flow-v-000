@@ -12,6 +12,8 @@ from Tier 1
 <div onClick={() => {this.setState({color: "#000"})}} className="tier1" style={{backgroundColor: this.state.color, color: this.state.color}}>
 
 
+onClick={() => {this.setState({color: "#000"})}}
+
 From tier2:
 
   constructor(props) {
@@ -24,3 +26,5 @@ From tier2:
   from Tier3:
 
   <div className="tier3" onClick={props.handleChildClick} style={{backgroundColor: props.color, color: props.color}}></div>
+
+  onClick={props.handleChildClick}

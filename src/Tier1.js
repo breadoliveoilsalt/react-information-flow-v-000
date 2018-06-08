@@ -7,7 +7,6 @@ export default class Tier1 extends Component {
 
   constructor(props) {
     super(props)
-    // const initialColor = getRandomColor()
     this.state = {
       color: getRandomColor(),
       childColor: getRandomColor(),
@@ -15,12 +14,29 @@ export default class Tier1 extends Component {
     }
   }
 
-  handleChildClick = (event) => {
-    event.stopPropagation()
-    console.log("Child Click!!")
+  handleParentClick = (event) => {
+    const newColor = getRandomColor()
+    const lighterShade = getReducedColor(newColor)
+    const evenLighterShade = getReducedColor(lighterShade)
+    this.setState({
+      color: newColor,
+      childColor: lighterShade,
+      grandchildColor: evenLighterShade
+    })
   }
 
-  handleGrandchildClick = () => {
+  handleChildClick = (event) => {
+    event.stopPropagation()
+    const newColor = getRandomColor()
+    const lighterShade = getReducedColor(newColor)
+    this.setState({
+      childColor: newColor,
+      grandchildColor: lighterShade
+    })
+  }
+
+  handleGrandchildClick = (event) => {
+    event.stopPropagation()
     const newColor = getRandomColor()
     this.setState({
       grandchildColor: newColor
@@ -31,7 +47,7 @@ export default class Tier1 extends Component {
     // hard coded color values have been added below, though they won't be
     // present in our solution. What should they be replaced with?
     return (
-      <div className="tier1" style={{backgroundColor: this.state.color, color: this.state.color}}>
+      <div className="tier1" onClick={this.handleParentClick} style={{backgroundColor: this.state.color, color: this.state.color}}>
         <Tier2
           childColor={this.state.childColor}
           grandchildColor={this.state.grandchildColor}

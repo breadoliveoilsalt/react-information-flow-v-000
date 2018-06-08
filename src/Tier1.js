@@ -15,8 +15,16 @@ export default class Tier1 extends Component {
     }
   }
 
+  handleChildClick = (event) => {
+    event.stopPropagation()
+    console.log("Child Click!!")
+  }
+
   handleGrandchildClick = () => {
-    console.log("handleGrandchildClick!!!")
+    const newColor = getRandomColor()
+    this.setState({
+      grandchildColor: newColor
+    })
   }
 
   render() {
@@ -26,10 +34,13 @@ export default class Tier1 extends Component {
       <div className="tier1" style={{backgroundColor: this.state.color, color: this.state.color}}>
         <Tier2
           childColor={this.state.childColor}
-          grandchildColor={this.state.grandchildColor} handleGrandchildClick={this.handleGrandchildClick}/>
+          grandchildColor={this.state.grandchildColor}
+          handleChildClick={this.handleChildClick}
+          handleGrandchildClick={this.handleGrandchildClick}/>
         <Tier2
           childColor={this.state.childColor}
           grandchildColor={this.state.grandchildColor}
+          handleChildClick={this.handleChildClick}
           handleGrandchildClick={this.handleGrandchildClick} />
       </div>
     )
